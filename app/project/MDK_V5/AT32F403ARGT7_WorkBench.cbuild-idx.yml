@@ -1,0 +1,21 @@
+build-idx:
+  generated-by: csolution version 2.11.0
+  csolution: AT32F403ARGT7_WorkBench.csolution.yml
+  cbuild-run: out/AT32F403ARGT7_WorkBench+AT32F403ARGT7_WorkBench.cbuild-run.yml
+  tmpdir: tmp
+  cprojects:
+    - cproject: AT32F403ARGT7_WorkBench.cproject.yml
+  cbuilds:
+    - cbuild: out/AT32F403ARGT7_WorkBench/AT32F403ARGT7_WorkBench/AT32F403ARGT7_WorkBench+AT32F403ARGT7_WorkBench.cbuild.yml
+      project: AT32F403ARGT7_WorkBench
+      configuration: +AT32F403ARGT7_WorkBench
+      messages:
+        errors:
+          - no default rwx memory nor algorithm with ramstart/size was found
+        info:
+          - AT32F403ARGT7_WorkBench.cbuild-pack.yml - file is already up-to-date
+          - AT32F403ARGT7_WorkBench+AT32F403ARGT7_WorkBench.cbuild-run.yml - file is already up-to-date
+          - AT32F403ARGT7_WorkBench+AT32F403ARGT7_WorkBench.cbuild.yml - file is already up-to-date
+      packs-unused:
+        - pack: ARM::CMSIS-DSP@1.16.2
+        - pack: ARM::CMSIS-NN@4.1.0

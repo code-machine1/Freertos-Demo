@@ -1,0 +1,281 @@
+build:
+  generated-by: csolution version 2.11.0
+  solution: ../../../AT32F403ARGT7_WorkBench.csolution.yml
+  project: ../../../AT32F403ARGT7_WorkBench.cproject.yml
+  context: AT32F403ARGT7_WorkBench+AT32F403ARGT7_WorkBench
+  compiler: AC6
+  device: ArteryTek::-AT32F403ARGT7
+  device-pack: ArteryTek::AT32F403A_407_DFP@2.2.1
+  processor:
+    endian: little
+    fpu: sp
+    core: Cortex-M4
+  packs:
+    - pack: ARM::CMSIS@6.1.0
+      path: ${CMSIS_PACK_ROOT}/ARM/CMSIS/6.1.0
+    - pack: ArteryTek::AT32F403A_407_DFP@2.2.1
+      path: ${CMSIS_PACK_ROOT}/ArteryTek/AT32F403A_407_DFP/2.2.1
+    - pack: GorgonMeducer::perf_counter@2.4.0
+      path: ${CMSIS_PACK_ROOT}/GorgonMeducer/perf_counter/2.4.0
+  optimize: debug
+  debug: on
+  misc:
+    ASM:
+      - -masm=auto
+    C:
+      - -std=gnu11
+      - -flto
+      - -fno-rtti
+      - -funsigned-char
+      - -fshort-enums
+      - -fshort-wchar
+      - -ffunction-sections
+      - -Wno-packed
+      - -Wno-missing-variable-declarations
+      - -Wno-missing-prototypes
+      - -Wno-missing-noreturn
+      - -Wno-sign-conversion
+      - -Wno-nonportable-include-path
+      - -Wno-reserved-id-macro
+      - -Wno-unused-macros
+      - -Wno-documentation-unknown-command
+      - -Wno-documentation
+      - -Wno-license-management
+      - -Wno-parentheses-equality
+    CPP:
+      - -xc++
+      - -std=c++11
+      - -fno-exceptions
+      - -flto
+      - -fno-rtti
+      - -funsigned-char
+      - -fshort-enums
+      - -fshort-wchar
+      - -ffunction-sections
+      - -Wno-packed
+      - -Wno-missing-variable-declarations
+      - -Wno-missing-prototypes
+      - -Wno-missing-noreturn
+      - -Wno-sign-conversion
+      - -Wno-nonportable-include-path
+      - -Wno-reserved-id-macro
+      - -Wno-unused-macros
+      - -Wno-documentation-unknown-command
+      - -Wno-documentation
+      - -Wno-license-management
+      - -Wno-parentheses-equality
+    Link:
+      - --library_type=microlib
+      - --map
+      - --load_addr_map_info
+      - --xref
+      - --callgraph
+      - --symbols
+      - --info sizes
+      - --info totals
+      - --info unused
+      - --info veneers
+      - --lto
+      - --strict
+      - --summary_stderr
+      - --info summarysizes
+  define:
+    - AT32F403ARGT7
+    - USE_STDPERIPH_DRIVER
+    - AT_START_F403A_V1
+    - __MICROLIB
+    - AT32F403ARGT7
+    - _RTE_
+  define-asm:
+    - __MICROLIB
+    - AT32F403ARGT7
+    - _RTE_
+  add-path:
+    - ../../../../../libraries/drivers/inc
+    - ../../../../../libraries/cmsis/cm4/core_support
+    - ../../../../../libraries/cmsis/cm4/device_support
+    - ../../../../inc
+    - ../../../../system
+    - ../../../../app
+    - ../../../../drive
+    - ../../../RTE/_AT32F403ARGT7_WorkBench
+    - ${CMSIS_PACK_ROOT}/ARM/CMSIS/6.1.0/CMSIS/Core/Include
+    - ${CMSIS_PACK_ROOT}/ArteryTek/AT32F403A_407_DFP/2.2.1/Device/Include
+    - ${CMSIS_PACK_ROOT}/GorgonMeducer/perf_counter/2.4.0
+  add-path-asm:
+    - ../../../RTE/_AT32F403ARGT7_WorkBench
+    - ${CMSIS_PACK_ROOT}/ARM/CMSIS/6.1.0/CMSIS/Core/Include
+    - ${CMSIS_PACK_ROOT}/ArteryTek/AT32F403A_407_DFP/2.2.1/Device/Include
+    - ${CMSIS_PACK_ROOT}/GorgonMeducer/perf_counter/2.4.0
+  output-dirs:
+    intdir: ../../../tmp
+    outdir: .
+    rtedir: ../../../RTE
+  output:
+    - type: elf
+      file: AT32F403ARGT7_WorkBench.axf
+  components:
+    - component: ARM::CMSIS:CORE@6.1.0
+      condition: ARMv6_7_8-M Device
+      from-pack: ARM::CMSIS@6.1.0
+      selected-by: ARM::CMSIS:CORE
+      files:
+        - file: ${CMSIS_PACK_ROOT}/ARM/CMSIS/6.1.0/CMSIS/Core/Include
+          category: include
+          version: 6.1.0
+        - file: ${CMSIS_PACK_ROOT}/ARM/CMSIS/6.1.0/CMSIS/Documentation/html/Core/index.html
+          category: doc
+          version: 6.1.0
+    - component: GorgonMeducer::Utilities:perf_counter:Core&Source@2.4.0
+      condition: CMSIS-CORE
+      from-pack: GorgonMeducer::perf_counter@2.4.0
+      selected-by: GorgonMeducer::Utilities:perf_counter:Core&Source
+      files:
+        - file: ${CMSIS_PACK_ROOT}/GorgonMeducer/perf_counter/2.4.0/perf_counter.c
+          category: sourceC
+          version: 2.4.0
+        - file: ${CMSIS_PACK_ROOT}/GorgonMeducer/perf_counter/2.4.0/perf_counter.h
+          category: header
+          version: 2.4.0
+        - file: ${CMSIS_PACK_ROOT}/GorgonMeducer/perf_counter/2.4.0/perfc_port_default.c
+          category: sourceC
+          version: 2.4.0
+        - file: ${CMSIS_PACK_ROOT}/GorgonMeducer/perf_counter/2.4.0/systick_wrapper_gnu.s
+          category: sourceAsm
+          version: 2.4.0
+  linker:
+    script: ../../../AT32F403ARGT7_WorkBench_AT32F403ARGT7_WorkBench.sct
+  groups:
+    - group: user
+      files:
+        - file: ../../../../src/main.c
+          category: sourceC
+        - file: ../../../../src/at32f403a_407_wk_config.c
+          category: sourceC
+        - file: ../../../../src/at32f403a_407_int.c
+          category: sourceC
+        - file: ../../../../src/wk_system.c
+          category: sourceC
+        - file: ../../../../src/wk_crc.c
+          category: sourceC
+        - file: ../../../../src/wk_dma.c
+          category: sourceC
+        - file: ../../../../src/wk_debug.c
+          category: sourceC
+        - file: ../../../../src/wk_gpio.c
+          category: sourceC
+        - file: ../../../../src/wk_adc.c
+          category: sourceC
+        - file: ../../../../src/wk_exint.c
+          category: sourceC
+        - file: ../../../../src/wk_spi.c
+          category: sourceC
+        - file: ../../../../src/wk_tmr.c
+          category: sourceC
+        - file: ../../../../src/wk_usart.c
+          category: sourceC
+        - file: ../../../../src/wk_wdt.c
+          category: sourceC
+        - file: ../../../../drive/userconfig.h
+          category: header
+    - group: firmware
+      files:
+        - file: ../../../../../libraries/drivers/src/at32f403a_407_crm.c
+          category: sourceC
+        - file: ../../../../../libraries/drivers/src/at32f403a_407_tmr.c
+          category: sourceC
+        - file: ../../../../../libraries/drivers/src/at32f403a_407_gpio.c
+          category: sourceC
+        - file: ../../../../../libraries/drivers/src/at32f403a_407_usart.c
+          category: sourceC
+        - file: ../../../../../libraries/drivers/src/at32f403a_407_pwc.c
+          category: sourceC
+        - file: ../../../../../libraries/drivers/src/at32f403a_407_adc.c
+          category: sourceC
+        - file: ../../../../../libraries/drivers/src/at32f403a_407_spi.c
+          category: sourceC
+        - file: ../../../../../libraries/drivers/src/at32f403a_407_dma.c
+          category: sourceC
+        - file: ../../../../../libraries/drivers/src/at32f403a_407_flash.c
+          category: sourceC
+        - file: ../../../../../libraries/drivers/src/at32f403a_407_crc.c
+          category: sourceC
+        - file: ../../../../../libraries/drivers/src/at32f403a_407_wdt.c
+          category: sourceC
+        - file: ../../../../../libraries/drivers/src/at32f403a_407_exint.c
+          category: sourceC
+        - file: ../../../../../libraries/drivers/src/at32f403a_407_misc.c
+          category: sourceC
+        - file: ../../../../../libraries/drivers/src/at32f403a_407_debug.c
+          category: sourceC
+    - group: cmsis
+      files:
+        - file: ../../../startup_at32f403a_407.s
+          category: sourceAsm
+          misc:
+            ASM:
+              - -masm=auto
+        - file: ../../../../../libraries/cmsis/cm4/device_support/system_at32f403a_407.c
+          category: sourceC
+    - group: system
+      files:
+        - file: ../../../../system/adc_filter.c
+          category: sourceC
+        - file: ../../../../system/pid_operation.c
+          category: sourceC
+        - file: ../../../../system/tmt.c
+          category: sourceC
+    - group: app
+      files:
+        - file: ../../../../app/PC_comm_handle.c
+          category: sourceC
+        - file: ../../../../app/key_handle.c
+          category: sourceC
+        - file: ../../../../app/beep_handle.c
+          category: sourceC
+        - file: ../../../../app/flash_handle.c
+          category: sourceC
+        - file: ../../../../app/output_handle.c
+          category: sourceC
+        - file: ../../../../app/display_handle.c
+          category: sourceC
+        - file: ../../../../app/BE02_HANDLE.c
+          category: sourceC
+    - group: drive
+      files:
+        - file: ../../../../drive/at32_Usart.c
+          category: sourceC
+        - file: ../../../../drive/util_queue.c
+          category: sourceC
+        - file: ../../../../drive/iap.c
+          category: sourceC
+        - file: ../../../../drive/at32_spiflash.c
+          category: sourceC
+        - file: ../../../../drive/beep.c
+          category: sourceC
+        - file: ../../../../drive/flash.c
+          category: sourceC
+        - file: ../../../../drive/key.c
+          category: sourceC
+        - file: ../../../../drive/lcd.c
+          category: sourceC
+  constructed-files:
+    - file: ../../../RTE/_AT32F403ARGT7_WorkBench/Pre_Include_Global.h
+      category: preIncludeGlobal
+    - file: ../../../RTE/_AT32F403ARGT7_WorkBench/RTE_Components.h
+      category: header
+  licenses:
+    - license: <unknown>
+      packs:
+        - pack: ArteryTek::AT32F403A_407_DFP@2.2.1
+    - license: <unknown>
+      license-agreement: ${CMSIS_PACK_ROOT}/GorgonMeducer/perf_counter/2.4.0/LICENSE
+      packs:
+        - pack: GorgonMeducer::perf_counter@2.4.0
+      components:
+        - component: GorgonMeducer::Utilities:perf_counter:Core&Source@2.4.0
+    - license: Apache-2.0
+      packs:
+        - pack: ARM::CMSIS@6.1.0
+      components:
+        - component: ARM::CMSIS:CORE@6.1.0

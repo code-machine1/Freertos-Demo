@@ -1,0 +1,8 @@
+cbuild-run:
+  generated-by: csolution version 2.11.0
+  solution: ../AT32F403ARGT7_WorkBench.csolution.yml
+  target-type: AT32F403ARGT7_WorkBench
+  target-set: <default>
+  compiler: AC6
+  device: ArteryTek::-AT32F403ARGT7
+  device-pack: ArteryTek::AT32F403A_407_DFP@2.2.1

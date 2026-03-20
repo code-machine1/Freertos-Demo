@@ -1,0 +1,140 @@
+project:
+  packs:
+    - pack: ArteryTek::AT32F403A_407_DFP@^2.2.1
+    - pack: ARM::CMSIS@^6.1.0
+    - pack: GorgonMeducer::perf_counter@^2.4.0
+    - pack: ARM::CMSIS-NN@^4.0.0
+    - pack: ARM::CMSIS-DSP@^1.10.1
+  setups:
+    - setup: Options for AT32F403ARGT7_WorkBench
+      processor:
+        fpu: sp
+      add-path:
+        - ../../libraries/drivers/inc
+        - ../../libraries/cmsis/cm4/core_support
+        - ../../libraries/cmsis/cm4/device_support
+        - ../inc
+        - ../system
+        - ../app
+        - ../drive
+      debug: "on"
+      define:
+        - AT32F403ARGT7
+        - USE_STDPERIPH_DRIVER
+        - AT_START_F403A_V1
+        - __MICROLIB
+      define-asm:
+        - __MICROLIB
+      misc:
+        - C:
+            - -std=gnu11
+          C-CPP:
+            - -flto
+            - -fno-rtti
+            - -funsigned-char
+            - -fshort-enums
+            - -fshort-wchar
+            - -ffunction-sections
+            - -Wno-packed
+            - -Wno-missing-variable-declarations
+            - -Wno-missing-prototypes
+            - -Wno-missing-noreturn
+            - -Wno-sign-conversion
+            - -Wno-nonportable-include-path
+            - -Wno-reserved-id-macro
+            - -Wno-unused-macros
+            - -Wno-documentation-unknown-command
+            - -Wno-documentation
+            - -Wno-license-management
+            - -Wno-parentheses-equality
+          CPP:
+            - -xc++
+            - -std=c++11
+            - -fno-exceptions
+          ASM:
+            - -masm=auto
+          Link:
+            - --library_type=microlib
+            - --map
+            - --load_addr_map_info
+            - --xref
+            - --callgraph
+            - --symbols
+            - --info sizes
+            - --info totals
+            - --info unused
+            - --info veneers
+            - --lto
+            - --strict
+            - --summary_stderr
+            - --info summarysizes
+  linker:
+    - script: AT32F403ARGT7_WorkBench_AT32F403ARGT7_WorkBench.sct
+  groups:
+    - group: user
+      files:
+        - file: ../src/main.c
+        - file: ../src/at32f403a_407_wk_config.c
+        - file: ../src/at32f403a_407_int.c
+        - file: ../src/wk_system.c
+        - file: ../src/wk_crc.c
+        - file: ../src/wk_dma.c
+        - file: ../src/wk_debug.c
+        - file: ../src/wk_gpio.c
+        - file: ../src/wk_adc.c
+        - file: ../src/wk_exint.c
+        - file: ../src/wk_spi.c
+        - file: ../src/wk_tmr.c
+        - file: ../src/wk_usart.c
+        - file: ../src/wk_wdt.c
+        - file: ../drive/userconfig.h
+    - group: firmware
+      files:
+        - file: ../../libraries/drivers/src/at32f403a_407_crm.c
+        - file: ../../libraries/drivers/src/at32f403a_407_tmr.c
+        - file: ../../libraries/drivers/src/at32f403a_407_gpio.c
+        - file: ../../libraries/drivers/src/at32f403a_407_usart.c
+        - file: ../../libraries/drivers/src/at32f403a_407_pwc.c
+        - file: ../../libraries/drivers/src/at32f403a_407_adc.c
+        - file: ../../libraries/drivers/src/at32f403a_407_spi.c
+        - file: ../../libraries/drivers/src/at32f403a_407_dma.c
+        - file: ../../libraries/drivers/src/at32f403a_407_flash.c
+        - file: ../../libraries/drivers/src/at32f403a_407_crc.c
+        - file: ../../libraries/drivers/src/at32f403a_407_wdt.c
+        - file: ../../libraries/drivers/src/at32f403a_407_exint.c
+        - file: ../../libraries/drivers/src/at32f403a_407_misc.c
+        - file: ../../libraries/drivers/src/at32f403a_407_debug.c
+    - group: cmsis
+      files:
+        - file: startup_at32f403a_407.s
+          misc:
+            - ASM:
+                - -masm=auto
+        - file: ../../libraries/cmsis/cm4/device_support/system_at32f403a_407.c
+    - group: system
+      files:
+        - file: ../system/adc_filter.c
+        - file: ../system/pid_operation.c
+        - file: ../system/tmt.c
+    - group: app
+      files:
+        - file: ../app/PC_comm_handle.c
+        - file: ../app/key_handle.c
+        - file: ../app/beep_handle.c
+        - file: ../app/flash_handle.c
+        - file: ../app/output_handle.c
+        - file: ../app/display_handle.c
+        - file: ../app/BE02_HANDLE.c
+    - group: drive
+      files:
+        - file: ../drive/at32_Usart.c
+        - file: ../drive/util_queue.c
+        - file: ../drive/iap.c
+        - file: ../drive/at32_spiflash.c
+        - file: ../drive/beep.c
+        - file: ../drive/flash.c
+        - file: ../drive/key.c
+        - file: ../drive/lcd.c
+  components:
+    - component: ARM::CMSIS:CORE
+    - component: GorgonMeducer::Utilities:perf_counter:Core&Source

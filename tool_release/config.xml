@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<Configuration>
+  <PortType>0</PortType>
+  <COMPort>2</COMPort>
+  <BoudRate>115200</BoudRate>
+  <CRC>false</CRC>
+  <AppAddress>08004000</AppAddress>
+  <AppDownloadFile>D:\Work Area\Code For WorkBench\BE02\app\project\MDK_V5\listings\AT32F413RCT7_WorkBench.bin</AppDownloadFile>
+</Configuration>

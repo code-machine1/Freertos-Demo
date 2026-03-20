@@ -1,0 +1,18 @@
+solution:
+  created-by: uv2csolution@1.6.0
+  created-for: CMSIS-Toolbox@2.7.0
+  compiler: AC6
+  target-types:
+    - type: AT32F403ARGT7_WorkBench
+      device: -AT32F403ARGT7
+      optimize: debug
+      target-set:
+        - set:
+          images:
+            - project-context: AT32F403ARGT7_WorkBench
+          debugger:
+            name: JLink Server
+            port: 3333
+            protocol: swd
+  projects:
+    - project: AT32F403ARGT7_WorkBench.cproject.yml

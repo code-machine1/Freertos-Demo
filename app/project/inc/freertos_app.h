@@ -1,0 +1,91 @@
+/* add user code begin Header */
+/**
+ ******************************************************************************
+ * File Name          : freertos_app.h
+ * Description        : Code for freertos applications
+ */
+/* add user code end Header */
+  
+#ifndef FREERTOS_APP_H
+#define FREERTOS_APP_H
+
+/* Includes ------------------------------------------------------------------*/
+#include "FreeRTOS.h"
+#include "task.h"
+#include "semphr.h"
+#include "queue.h"
+#include "timers.h"
+#include "event_groups.h"
+
+/* private includes -------------------------------------------------------------*/
+/* add user code begin private includes */
+
+#include "at32f403a_407.h"
+#include "stdbool.h"
+#include "stdio.h"
+
+#include "iap.h"
+#include "key_handle.h"
+#include "PC_comm_handle.h"
+#include "wifi_handle.h"
+#include "xmc_lcd.h"
+#include "at32_spiflash.h"
+#include "usr_touch.h"
+
+#include "perf_counter.h"
+#include "EventRecorder.h"
+
+#include "wifi_uart.h"
+/* add user code end private includes */
+
+/* exported types -------------------------------------------------------------*/
+/* add user code begin exported types */
+
+/* add user code end exported types */
+
+/* exported constants --------------------------------------------------------*/
+/* add user code begin exported constants */
+
+/* add user code end exported constants */
+
+/* exported macro ------------------------------------------------------------*/
+/* add user code begin exported macro */
+
+/* add user code end exported macro */
+
+/* task handler */
+extern TaskHandle_t lcd_task_handle;
+extern TaskHandle_t key_task_handle;
+extern TaskHandle_t iap_task_handle;
+extern TaskHandle_t beep_task_handle;
+extern TaskHandle_t wdt_task_handle;
+extern TaskHandle_t led_task_handle;
+extern TaskHandle_t pc_task_handle;
+extern TaskHandle_t wifi_task_handle;
+/* declaration for task function */
+void lcd_function(void *pvParameters);
+void key_function(void *pvParameters);
+void iap_function(void *pvParameters);
+void beep_function(void *pvParameters);
+void wdt_function(void *pvParameters);
+void led_function(void *pvParameters);
+void pc_function(void *pvParameters);
+void wifi_function(void *pvParameters);
+
+/* queue handler */
+extern QueueHandle_t usart1_queue_handle;
+extern QueueHandle_t uart4_queue_handle;
+
+/* add user code begin 0 */
+
+/* add user code end 0 */
+
+void freertos_task_create(void);
+void freertos_queue_create(void);
+void wk_freertos_init(void);
+
+/* add user code begin 1 */
+
+/* add user code end 1 */
+
+#endif /* FREERTOS_APP_H */

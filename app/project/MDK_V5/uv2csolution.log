@@ -1,0 +1,10 @@
+1 out of 1 target(s) converted
+Created solution: D:/Work Area/Code For WorkBench/BE02/app/project/MDK_V5/AT32F403ARGT7_WorkBench.csolution.yml
+With projects:
+- D:/Work Area/Code For WorkBench/BE02/app/project/MDK_V5/AT32F403ARGT7_WorkBench.cproject.yml
+Error: 0 error(s), 1 warning(s):
+Warnings:
+	The target "AT32F403ARGT7_WorkBench" is configured with following user commands which should be run manually:
+            After Build/Rebuild
+                "D:\Work Area\Code For WorkBench\BE02\app\project\MDK_V5\keil5_disp_size_bar.exe"
+                fromelf.exe --bin --output .\Listings\@L.bin !L

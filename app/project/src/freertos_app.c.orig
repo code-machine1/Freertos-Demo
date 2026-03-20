@@ -1,0 +1,533 @@
+/* add user code begin Header */
+/**
+ ******************************************************************************
+ * File Name          : freertos_app.c
+ * Description        : Code for freertos applications
+ */
+/* add user code end Header */
+
+/* Includes ------------------------------------------------------------------*/
+#include "freertos_app.h"
+
+/* private includes ----------------------------------------------------------*/
+/* add user code begin private includes */
+
+/* add user code end private includes */
+
+/* private typedef -----------------------------------------------------------*/
+/* add user code begin private typedef */
+
+/* add user code end private typedef */
+
+/* private define ------------------------------------------------------------*/
+/* add user code begin private define */
+
+/* add user code end private define */
+
+/* private macro -------------------------------------------------------------*/
+/* add user code begin private macro */
+
+/* add user code end private macro */
+
+/* private variables ---------------------------------------------------------*/
+/* add user code begin private variables */
+
+/* add user code end private variables */
+
+/* private function prototypes --------------------------------------------*/
+/* add user code begin function prototypes */
+void breath_led(gpio_type *gpio_x, uint16_t pin);
+/* add user code end function prototypes */
+
+/* private user code ---------------------------------------------------------*/
+/* add user code begin 0 */
+
+/* add user code end 0 */
+
+/* task handler */
+TaskHandle_t lcd_task_handle;
+TaskHandle_t key_task_handle;
+TaskHandle_t iap_task_handle;
+TaskHandle_t beep_task_handle;
+TaskHandle_t wdt_task_handle;
+TaskHandle_t led_task_handle;
+TaskHandle_t pc_task_handle;
+TaskHandle_t wifi_task_handle;
+
+/* queue handler */
+QueueHandle_t usart1_queue_handle;
+QueueHandle_t uart4_queue_handle;
+
+/* Idle task control block and stack */
+static StackType_t idle_task_stack[configMINIMAL_STACK_SIZE];
+static StackType_t timer_task_stack[configTIMER_TASK_STACK_DEPTH];
+
+static StaticTask_t idle_task_tcb;
+static StaticTask_t timer_task_tcb;
+
+/* External Idle and Timer task static memory allocation functions */
+extern void vApplicationGetIdleTaskMemory( StaticTask_t ** ppxIdleTaskTCBBuffer, StackType_t ** ppxIdleTaskStackBuffer, uint32_t *pulIdleTaskStackSize );
+extern void vApplicationGetTimerTaskMemory( StaticTask_t ** ppxTimerTaskTCBBuffer, StackType_t ** ppxTimerTaskStackBuffer, uint32_t * pulTimerTaskStackSize );
+
+/*
+  vApplicationGetIdleTaskMemory gets called when configSUPPORT_STATIC_ALLOCATION
+  equals to 1 and is required for static memory allocation support.
+*/
+void vApplicationGetIdleTaskMemory( StaticTask_t ** ppxIdleTaskTCBBuffer, StackType_t ** ppxIdleTaskStackBuffer, uint32_t *pulIdleTaskStackSize )
+{
+  *ppxIdleTaskTCBBuffer = &idle_task_tcb;
+  *ppxIdleTaskStackBuffer = &idle_task_stack[0];
+  *pulIdleTaskStackSize = (uint32_t)configMINIMAL_STACK_SIZE;
+}
+/*
+  vApplicationGetTimerTaskMemory gets called when configSUPPORT_STATIC_ALLOCATION
+  equals to 1 and is required for static memory allocation support.
+*/
+void vApplicationGetTimerTaskMemory( StaticTask_t ** ppxTimerTaskTCBBuffer, StackType_t ** ppxTimerTaskStackBuffer, uint32_t * pulTimerTaskStackSize )
+{
+  *ppxTimerTaskTCBBuffer = &timer_task_tcb;
+  *ppxTimerTaskStackBuffer = &timer_task_stack[0];
+  *pulTimerTaskStackSize = (uint32_t)configTIMER_TASK_STACK_DEPTH;
+}
+
+/* add user code begin 1 */
+
+/* add user code end 1 */
+
+/**
+  * @brief  initializes all task.
+  * @param  none
+  * @retval none
+  */
+void freertos_task_create(void)
+{
+  /* create lcd_task task */
+  xTaskCreate(lcd_function,
+              "lcd_task",
+              128,
+              NULL,
+              0,
+              &lcd_task_handle);
+
+  /* create key_task task */
+  xTaskCreate(key_function,
+              "key_task",
+              128,
+              NULL,
+              0,
+              &key_task_handle);
+
+  /* create iap_task task */
+  xTaskCreate(iap_function,
+              "iap_task",
+              128,
+              NULL,
+              0,
+              &iap_task_handle);
+
+  /* create beep_task task */
+  xTaskCreate(beep_function,
+              "beep_task",
+              128,
+              NULL,
+              0,
+              &beep_task_handle);
+
+  /* create wdt_task task */
+  xTaskCreate(wdt_function,
+              "wdt_task",
+              128,
+              NULL,
+              0,
+              &wdt_task_handle);
+
+  /* create led_task task */
+  xTaskCreate(led_function,
+              "led_task",
+              128,
+              NULL,
+              0,
+              &led_task_handle);
+
+  /* create pc_task task */
+  xTaskCreate(pc_function,
+              "pc_task",
+              128,
+              NULL,
+              0,
+              &pc_task_handle);
+
+  /* create wifi_task task */
+  xTaskCreate(wifi_function,
+              "wifi_task",
+              4096,
+              NULL,
+              0,
+              &wifi_task_handle);
+}
+
+/**
+  * @brief  initializes all queue.
+  * @param  none
+  * @retval none
+  */
+void freertos_queue_create(void)
+{
+  /* Create the usart1_queue, storing the returned handle in the xQueue variable. */
+  usart1_queue_handle = xQueueCreate(128, sizeof(uint8_t));
+
+  /* Create the uart4_queue, storing the returned handle in the xQueue variable. */
+  uart4_queue_handle = xQueueCreate(1024, sizeof(uint8_t));
+}
+
+/**
+  * @brief  freertos init and begin run.
+  * @param  none
+  * @retval none
+  */
+void wk_freertos_init(void)
+{
+  /* add user code begin freertos_init 0 */
+    /* add user code end freertos_init 0 */
+
+  /* enter critical */
+  taskENTER_CRITICAL();
+
+  freertos_queue_create();
+  freertos_task_create();
+	
+  /* add user code begin freertos_init 1 */
+    /* add user code end freertos_init 1 */
+
+  /* exit critical */
+  taskEXIT_CRITICAL();
+
+  /* start scheduler */
+  vTaskStartScheduler();
+}
+
+/**
+  * @brief lcd_task function.
+  * @param  none
+  * @retval none
+  */
+void lcd_function(void *pvParameters)
+{
+  /* add user code begin lcd_function 0 */
+    lcd_init();
+    usr_touchInit();
+    /* add user code end lcd_function 0 */
+
+  /* add user code begin lcd_function 2 */
+    lcd_clear(RED);
+
+    /* add user code end lcd_function 2 */
+
+  /* Infinite loop */
+  while(1)
+  {
+  /* add user code begin lcd_function 1 */
+        vTaskDelay(1000);
+        /* add user code end lcd_function 1 */
+  }
+}
+
+
+/**
+  * @brief key_task function.
+  * @param  none
+  * @retval none
+  */
+void key_function(void *pvParameters)
+{
+  /* add user code begin key_function 0 */
+
+    /* add user code end key_function 0 */
+
+  /* add user code begin key_function 2 */
+
+    /* add user code end key_function 2 */
+
+  /* Infinite loop */
+  while(1)
+  {
+  /* add user code begin key_function 1 */
+        key_handle();
+        vTaskDelay(KEY_TASK_TIME);
+        /* add user code end key_function 1 */
+  }
+}
+
+
+/**
+  * @brief iap_task function.
+  * @param  none
+  * @retval none
+  */
+void iap_function(void *pvParameters)
+{
+  /* add user code begin iap_function 0 */
+    iap_init();
+
+    /* add user code end iap_function 0 */
+
+  /* add user code begin iap_function 2 */
+
+    /* add user code end iap_function 2 */
+
+  /* Infinite loop */
+  while(1)
+  {
+  /* add user code begin iap_function 1 */
+        iap_command_handle();
+        vTaskDelay(10);
+        /* add user code end iap_function 1 */
+  }
+}
+
+
+/**
+  * @brief beep_task function.
+  * @param  none
+  * @retval none
+  */
+void beep_function(void *pvParameters)
+{
+  /* add user code begin beep_function 0 */
+
+    /* add user code end beep_function 0 */
+
+  /* add user code begin beep_function 2 */
+
+    /* add user code end beep_function 2 */
+
+  /* Infinite loop */
+  while(1)
+  {
+  /* add user code begin beep_function 1 */
+        vTaskDelay(1);
+        /* add user code end beep_function 1 */
+  }
+}
+
+
+/**
+  * @brief wdt_task function.
+  * @param  none
+  * @retval none
+  */
+void wdt_function(void *pvParameters)
+{
+  /* add user code begin wdt_function 0 */
+
+    /* add user code end wdt_function 0 */
+
+  /* add user code begin wdt_function 2 */
+    // wdt_enable();
+    /* add user code end wdt_function 2 */
+
+  /* Infinite loop */
+  while(1)
+  {
+  /* add user code begin wdt_function 1 */
+        wdt_counter_reload();
+        vTaskDelay(200);
+        /* add user code end wdt_function 1 */
+  }
+}
+
+
+/**
+  * @brief led_task function.
+  * @param  none
+  * @retval none
+  */
+void led_function(void *pvParameters)
+{
+  /* add user code begin led_function 0 */
+
+    /* add user code end led_function 0 */
+
+  /* add user code begin led_function 2 */
+
+    /* add user code end led_function 2 */
+
+  /* Infinite loop */
+  while(1)
+  {
+  /* add user code begin led_function 1 */
+        breath_led(GPIOA, GPIO_PINS_12);
+        vTaskDelay(1);
+        /* add user code end led_function 1 */
+  }
+}
+
+
+/**
+  * @brief pc_task function.
+  * @param  none
+  * @retval none
+  */
+void pc_function(void *pvParameters)
+{
+  /* add user code begin pc_function 0 */
+    uint8_t send_buff[] = {"uasrt send"};
+    /* add user code end pc_function 0 */
+
+  /* add user code begin pc_function 2 */
+
+    /* add user code end pc_function 2 */
+
+  /* Infinite loop */
+  while(1)
+  {
+  /* add user code begin pc_function 1 */
+        vTaskDelay(10);
+        /* add user code end pc_function 1 */
+  }
+}
+
+
+/**
+ * @brief wifi_task function.
+ * @param  none
+ * @retval none
+ */
+void wifi_function(void *pvParameters)
+{
+    /* add user code begin wifi_function 0 */
+    uint8_t test_step = 0;
+    /* add user code end wifi_function 0 */
+    /* add user code begin wifi_function 2 */
+    vTaskDelay(2000);
+    wifi_handle_init();
+    vTaskDelay(500);
+    // 禁用自动重连
+    wifi_send_at_cmd("AT+WAUTOCONN=0", NULL, 0, 1000);
+    vTaskDelay(500);
+    
+         
+        wifi_provision_start("WiFi_Config", "12345678", 120); // 热点SSID和密码，超时120秒
+        vTaskDelay(2000);
+        /* add user code end wifi_function 2 */
+
+        /* Infinite loop */
+        while (1)
+        {
+            /* add user code begin wifi_function 1 */
+            wifi_provision_process();
+        provision_state_t state = wifi_provision_get_state();
+
+        if (state == PROV_STATE_CONNECTED)
+        {
+            provision_result_t result;
+            if (wifi_provision_get_result(&result) == 0)
+            {
+                printf("配网成功，SSID: %s, IP: %s\n", result.ssid, result.ip);
+                // 可选：停止配网，进入正常模式
+                // wifi_provision_stop();
+            }
+        }
+        else if (state == PROV_STATE_TIMEOUT || state == PROV_STATE_IDLE)
+        {
+            printf("配网失败或超时\n");
+            // 可在此处重启配网
+            vTaskDelay(5000);
+            wifi_provision_start("WiFi_Config", "12345678", 120);
+        }
+
+        vTaskDelay(30);
+            /* add user code end wifi_function 1 */
+        }
+    }
+}
+
+/* add user code begin 2 */
+void breath_led(gpio_type *gpio_x, uint16_t pin)
+{
+    static uint32_t counter = 0;
+    static uint16_t brightness = 0;
+    static int8_t direction = 1;
+    static uint8_t pwm_counter = 0;
+    static uint8_t pwm_cycle = 20;
+    static uint16_t compare_value = 0;
+    pwm_counter++;
+
+    if (pwm_counter >= pwm_cycle)
+    {
+        pwm_counter = 0;
+    }
+
+    if (pwm_counter * 50 < compare_value)
+    {
+        gpio_bits_set(gpio_x, pin);
+    }
+    else
+    {
+        gpio_bits_reset(gpio_x, pin);
+    }
+
+    counter++;
+    uint8_t safe_speed = 5;
+
+    if (safe_speed > 10)
+    {
+        safe_speed = 10;
+    }
+
+    if (safe_speed < 1)
+    {
+        safe_speed = 1;
+    }
+
+    uint16_t update_interval = 20 / safe_speed;
+
+    if (update_interval < 1)
+    {
+        update_interval = 1;
+    }
+
+    if (counter % update_interval == 0)
+    {
+        uint16_t step = safe_speed;
+        brightness += direction * step;
+
+        if (direction > 0)
+        {
+            if (brightness >= 1000)
+            {
+                brightness = 1000;
+                direction = -1;
+            }
+        }
+        else
+        {
+            if (brightness <= 0)
+            {
+                brightness = 0;
+                direction = 1;
+            }
+        }
+
+        if (brightness < 200)
+        {
+            compare_value = brightness / 4;
+        }
+        else if (brightness < 600)
+        {
+            compare_value = 50 + (brightness - 200) / 2;
+        }
+        else
+        {
+            compare_value = 250 + (brightness - 600) * 750 / 400;
+        }
+
+        if (counter > 60000)
+        {
+            counter = 0;
+        }
+    }
+}
+
+/* add user code end 2 */
+
