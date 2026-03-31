@@ -1,7 +1,7 @@
-./objects/main.o: ..\src\main.c \
+./objects/flash_programmer.o: ..\app\flash_programmer.c \
   D:\Work\ Program\Keil_v5\ARM\Packs\GorgonMeducer\perf_counter\2.5.4\perfc_common.h \
   RTE\_AT32F403ARGT7_WorkBench\Pre_Include_Global.h \
-  ..\inc\at32f403a_407_wk_config.h \
+  ..\app\flash_programmer.h ..\drive\at32_spiflash.h \
   D:\Work\ Program\Keil_v5\ARM\Packs\ArteryTek\AT32F403A_407_DFP\2.2.2\Device\Include\at32f403a_407.h \
   D:\Work\ Program\Keil_v5\ARM\Packs\ARM\CMSIS\6.3.0\CMSIS\Core\Include\core_cm4.h \
   D:\Work\ Program\Keil_v5\ARM\Packs\ArteryTek\AT32F403A_407_DFP\2.2.2\Device\Include\system_at32f403a_407.h \
@@ -31,29 +31,4 @@
   ..\..\libraries\drivers\inc\at32f403a_407_acc.h \
   ..\..\libraries\drivers\inc\at32f403a_407_misc.h \
   ..\..\libraries\drivers\inc\at32f403a_407_usb.h \
-  ..\..\libraries\drivers\inc\at32f403a_407_emac.h ..\inc\wk_adc.h \
-  ..\inc\wk_crc.h ..\inc\wk_debug.h ..\inc\wk_exint.h ..\inc\wk_spi.h \
-  ..\inc\wk_tmr.h ..\inc\wk_usart.h ..\inc\wk_wdt.h ..\inc\wk_xmc.h \
-  ..\inc\wk_dma.h ..\inc\wk_gpio.h ..\inc\freertos_app.h \
-  ..\..\middlewares\freertos\source\include\FreeRTOS.h \
-  ..\inc\FreeRTOSConfig.h \
-  ..\..\middlewares\freertos\source\include\projdefs.h \
-  ..\..\middlewares\freertos\source\include\portable.h \
-  ..\..\middlewares\freertos\source\include\deprecated_definitions.h \
-  ..\..\middlewares\freertos\source\portable\GCC\ARM_CM4F\portmacro.h \
-  ..\..\middlewares\freertos\source\include\mpu_wrappers.h \
-  ..\..\middlewares\freertos\source\include\task.h \
-  ..\..\middlewares\freertos\source\include\list.h \
-  ..\..\middlewares\freertos\source\include\semphr.h \
-  ..\..\middlewares\freertos\source\include\queue.h \
-  ..\..\middlewares\freertos\source\include\timers.h \
-  ..\..\middlewares\freertos\source\include\event_groups.h \
-  ..\drive\iap.h ..\app\key_handle.h ..\drive\key.h \
-  ..\app\PC_comm_handle.h ..\app\wifi_handle.h ..\app\flash_programmer.h \
-  ..\drive\xmc_lcd.h ..\drive\at32_spiflash.h ..\drive\usr_touch.h \
-  ..\drive\soft_i2c.h \
-  D:\Work\ Program\Keil_v5\ARM\Packs\GorgonMeducer\perf_counter\2.5.4\perf_counter.h \
-  D:\Work\ Program\Keil_v5\ARM\Packs\GorgonMeducer\perf_counter\2.5.4\perfc_port_default.h \
-  D:\Work\ Program\Keil_v5\ARM\Packs\ARM\CMSIS\6.3.0\CMSIS\Core\Include\cmsis_compiler.h \
-  D:\Work\ Program\Keil_v5\ARM\Packs\ARM\CMSIS-View\1.2.0\EventRecorder\Include\EventRecorder.h \
-  ..\drive\wifi_uart.h ..\drive\ds1302.h
+  ..\..\libraries\drivers\inc\at32f403a_407_emac.h

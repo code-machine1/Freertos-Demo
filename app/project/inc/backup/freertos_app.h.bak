@@ -28,6 +28,7 @@
 #include "key_handle.h"
 #include "PC_comm_handle.h"
 #include "wifi_handle.h"
+#include "flash_programmer.h"
 #include "xmc_lcd.h"
 #include "at32_spiflash.h"
 #include "usr_touch.h"
@@ -35,6 +36,7 @@
 #include "perf_counter.h"
 #include "EventRecorder.h"
 
+#include "wifi_uart.h"
 /* add user code end private includes */
 
 /* exported types -------------------------------------------------------------*/
@@ -61,6 +63,7 @@ extern TaskHandle_t wdt_task_handle;
 extern TaskHandle_t led_task_handle;
 extern TaskHandle_t pc_task_handle;
 extern TaskHandle_t wifi_task_handle;
+extern TaskHandle_t flash_task_handle;
 /* declaration for task function */
 void lcd_function(void *pvParameters);
 void key_function(void *pvParameters);
@@ -70,6 +73,7 @@ void wdt_function(void *pvParameters);
 void led_function(void *pvParameters);
 void pc_function(void *pvParameters);
 void wifi_function(void *pvParameters);
+void flash_function(void *pvParameters);
 
 /* queue handler */
 extern QueueHandle_t usart1_queue_handle;

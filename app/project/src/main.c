@@ -157,14 +157,8 @@ int main(void)
   /* init exint function. */
   wk_exint_config();
 
-  /* init tmr2 function. */
-  wk_tmr2_init();
-
   /* init tmr3 function. */
   wk_tmr3_init();
-
-  /* init tmr5 function. */
-  wk_tmr5_init();
 
   /* init crc function. */
   wk_crc_init();

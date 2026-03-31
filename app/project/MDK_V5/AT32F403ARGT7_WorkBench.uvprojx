@@ -434,11 +434,6 @@
               <FilePath>..\src\wk_spi.c</FilePath>
             </File>
             <File>
-              <FileName>wk_tmr.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\src\wk_tmr.c</FilePath>
-            </File>
-            <File>
               <FileName>wk_wdt.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\src\wk_wdt.c</FilePath>
@@ -462,6 +457,11 @@
               <FileName>wk_usart.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\src\wk_usart.c</FilePath>
+            </File>
+            <File>
+              <FileName>wk_tmr.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\src\wk_tmr.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -592,6 +592,11 @@
               <FileName>wifi_handle.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\app\wifi_handle.c</FilePath>
+            </File>
+            <File>
+              <FileName>flash_programmer.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\app\flash_programmer.c</FilePath>
             </File>
           </Files>
         </Group>

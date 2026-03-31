@@ -4,7 +4,7 @@
   * @file     wk_tmr.h
   * @brief    header file of work bench config
   **************************************************************************
-  *                       Copyright notice & Disclaimer
+  * Copyright (c) 2025, Artery Technology, All rights reserved.
   *
   * The software Board Support Package (BSP) that is made available to
   * download from Artery official website is the copyrighted work of Artery.
@@ -57,14 +57,8 @@ extern "C" {
 
 /* exported functions ------------------------------------------------------- */
 
-  /* init tmr2 function. */
-  void wk_tmr2_init(void);
-
   /* init tmr3 function. */
   void wk_tmr3_init(void);
-
-  /* init tmr5 function. */
-  void wk_tmr5_init(void);
 
 /* add user code begin exported functions */
 

@@ -1,27 +1,27 @@
 /* add user code begin Header */
 /**
- **************************************************************************
- * @file     wk_tmr.c
- * @brief    work bench config program
- **************************************************************************
- *                       Copyright notice & Disclaimer
- *
- * The software Board Support Package (BSP) that is made available to
- * download from Artery official website is the copyrighted work of Artery.
- * Artery authorizes customers to use, copy, and distribute the BSP
- * software and its related documentation for the purpose of design and
- * development in conjunction with Artery microcontrollers. Use of the
- * software is governed by this copyright notice and the following disclaimer.
- *
- * THIS SOFTWARE IS PROVIDED ON "AS IS" BASIS WITHOUT WARRANTIES,
- * GUARANTEES OR REPRESENTATIONS OF ANY KIND. ARTERY EXPRESSLY DISCLAIMS,
- * TO THE FULLEST EXTENT PERMITTED BY LAW, ALL EXPRESS, IMPLIED OR
- * STATUTORY OR OTHER WARRANTIES, GUARANTEES OR REPRESENTATIONS,
- * INCLUDING BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE, OR NON-INFRINGEMENT.
- *
- **************************************************************************
- */
+  **************************************************************************
+  * @file     wk_tmr.c
+  * @brief    work bench config program
+  **************************************************************************
+  * Copyright (c) 2025, Artery Technology, All rights reserved.
+  *
+  * The software Board Support Package (BSP) that is made available to
+  * download from Artery official website is the copyrighted work of Artery.
+  * Artery authorizes customers to use, copy, and distribute the BSP
+  * software and its related documentation for the purpose of design and
+  * development in conjunction with Artery microcontrollers. Use of the
+  * software is governed by this copyright notice and the following disclaimer.
+  *
+  * THIS SOFTWARE IS PROVIDED ON "AS IS" BASIS WITHOUT WARRANTIES,
+  * GUARANTEES OR REPRESENTATIONS OF ANY KIND. ARTERY EXPRESSLY DISCLAIMS,
+  * TO THE FULLEST EXTENT PERMITTED BY LAW, ALL EXPRESS, IMPLIED OR
+  * STATUTORY OR OTHER WARRANTIES, GUARANTEES OR REPRESENTATIONS,
+  * INCLUDING BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY,
+  * FITNESS FOR A PARTICULAR PURPOSE, OR NON-INFRINGEMENT.
+  *
+  **************************************************************************
+  */
 /* add user code end Header */
 
 /* Includes ------------------------------------------------------------------*/
@@ -30,42 +30,6 @@
 /* add user code begin 0 */
 
 /* add user code end 0 */
-
-/**
-  * @brief  init tmr2 function.
-  * @param  none
-  * @retval none
-  */
-void wk_tmr2_init(void)
-{
-  /* add user code begin tmr2_init 0 */
-
-  /* add user code end tmr2_init 0 */
-
-
-  /* add user code begin tmr2_init 1 */
-
-  /* add user code end tmr2_init 1 */
-
-  /* configure counter settings */
-  tmr_cnt_dir_set(TMR2, TMR_COUNT_DOWN);
-  tmr_clock_source_div_set(TMR2, TMR_CLOCK_DIV1);
-  tmr_period_buffer_enable(TMR2, FALSE);
-  tmr_base_init(TMR2, 60000, 28);
-
-  /* configure primary mode settings */
-  tmr_sub_sync_mode_set(TMR2, FALSE);
-  tmr_primary_mode_select(TMR2, TMR_PRIMARY_SEL_RESET);
-
-  /* configure one cycle mode */
-  tmr_one_cycle_mode_enable(TMR2, TRUE);
-
-  tmr_counter_enable(TMR2, TRUE);
-
-  /* add user code begin tmr2_init 2 */
-  tmr_interrupt_enable(TMR2, TMR_OVF_INT, TRUE);
-  /* add user code end tmr2_init 2 */
-}
 
 /**
   * @brief  init tmr3 function.
@@ -102,7 +66,7 @@ void wk_tmr3_init(void)
   tmr_cnt_dir_set(TMR3, TMR_COUNT_UP);
   tmr_clock_source_div_set(TMR3, TMR_CLOCK_DIV1);
   tmr_period_buffer_enable(TMR3, FALSE);
-  tmr_base_init(TMR3, 59999, 3);
+  tmr_base_init(TMR3, 10000, 0);
 
   /* configure primary mode settings */
   tmr_sub_sync_mode_set(TMR3, FALSE);
@@ -117,7 +81,7 @@ void wk_tmr3_init(void)
   tmr_output_struct.oc_idle_state = FALSE;
   tmr_output_struct.occ_idle_state = FALSE;
   tmr_output_channel_config(TMR3, TMR_SELECT_CHANNEL_1, &tmr_output_struct);
-  tmr_channel_value_set(TMR3, TMR_SELECT_CHANNEL_1, 30000);
+  tmr_channel_value_set(TMR3, TMR_SELECT_CHANNEL_1, 5000);
   tmr_output_channel_buffer_enable(TMR3, TMR_SELECT_CHANNEL_1, FALSE);
 
   tmr_output_channel_immediately_set(TMR3, TMR_SELECT_CHANNEL_1, FALSE);
@@ -128,39 +92,6 @@ void wk_tmr3_init(void)
   /* add user code begin tmr3_init 2 */
 
   /* add user code end tmr3_init 2 */
-}
-
-/**
-  * @brief  init tmr5 function.
-  * @param  none
-  * @retval none
-  */
-void wk_tmr5_init(void)
-{
-  /* add user code begin tmr5_init 0 */
-
-  /* add user code end tmr5_init 0 */
-
-
-  /* add user code begin tmr5_init 1 */
-
-  /* add user code end tmr5_init 1 */
-
-  /* configure counter settings */
-  tmr_cnt_dir_set(TMR5, TMR_COUNT_UP);
-  tmr_clock_source_div_set(TMR5, TMR_CLOCK_DIV1);
-  tmr_period_buffer_enable(TMR5, FALSE);
-  tmr_base_init(TMR5, 59999, 19);
-
-  /* configure primary mode settings */
-  tmr_sub_sync_mode_set(TMR5, FALSE);
-  tmr_primary_mode_select(TMR5, TMR_PRIMARY_SEL_RESET);
-
-  tmr_counter_enable(TMR5, TRUE);
-
-  /* add user code begin tmr5_init 2 */
-
-  /* add user code end tmr5_init 2 */
 }
 
 /* add user code begin 1 */

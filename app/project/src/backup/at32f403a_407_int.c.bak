@@ -233,24 +233,20 @@ void DMA1_Channel1_IRQHandler(void)
 void USART1_IRQHandler(void)
 {
   /* add user code begin USART1_IRQ 0 */
-
+  BaseType_t xHigherPriorityTaskWoken = pdFALSE;
+  uint8_t data;
   /* add user code end USART1_IRQ 0 */
 
   __IO uint16_t val_rx;
-
-  if(usart_interrupt_flag_get(USART1, USART_TDC_FLAG) != RESET)
-  {
-    /* add user code begin USART1_USART_TDC_FLAG */
-    /* clear flag */
-    usart_flag_clear(USART1, USART_TDC_FLAG);
-    /* add user code end USART1_USART_TDC_FLAG */
-  }
 
   if(usart_interrupt_flag_get(USART1, USART_RDBF_FLAG) != RESET)
   {
     /* add user code begin USART1_USART_RDBF_FLAG */
     /* handle data received and clear flag */
-    val_rx = usart_data_receive(USART1);
+    data = usart_data_receive(USART1);
+
+    /* 直接将数据放入队列，不做其他耗时操作 */
+        xQueueSendFromISR(usart1_queue_handle, &data, &xHigherPriorityTaskWoken);
     /* add user code end USART1_USART_RDBF_FLAG */ 
   }
 
@@ -275,7 +271,6 @@ void EXINT15_10_IRQHandler(void)
     /* add user code begin EXINT_LINE_15 */
     /* clear flag */
     exint_flag_clear(EXINT_LINE_15);
-
     /* add user code end EXINT_LINE_15 */ 
   }
 

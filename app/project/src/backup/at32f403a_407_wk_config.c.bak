@@ -183,14 +183,8 @@ void wk_periph_clock_config(void)
   /* enable usart1 periph clock */
   crm_periph_clock_enable(CRM_USART1_PERIPH_CLOCK, TRUE);
 
-  /* enable tmr2 periph clock */
-  crm_periph_clock_enable(CRM_TMR2_PERIPH_CLOCK, TRUE);
-
   /* enable tmr3 periph clock */
   crm_periph_clock_enable(CRM_TMR3_PERIPH_CLOCK, TRUE);
-
-  /* enable tmr5 periph clock */
-  crm_periph_clock_enable(CRM_TMR5_PERIPH_CLOCK, TRUE);
 
   /* enable spi4 periph clock */
   crm_periph_clock_enable(CRM_SPI4_PERIPH_CLOCK, TRUE);

@@ -76,9 +76,6 @@ void wk_usart1_init(void)
   /* enable receive data buffer full interrupt */
   usart_interrupt_enable(USART1, USART_RDBF_INT, TRUE);
 
-  /* enable transmit data complete interrupt */
-  usart_interrupt_enable(USART1, USART_TDC_INT, TRUE);
-
   /* add user code begin usart1_init 2 */
 
   /* add user code end usart1_init 2 */

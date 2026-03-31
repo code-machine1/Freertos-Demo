@@ -46,8 +46,9 @@
   ..\..\middlewares\freertos\source\include\timers.h \
   ..\..\middlewares\freertos\source\include\event_groups.h \
   ..\drive\iap.h ..\app\key_handle.h ..\drive\key.h \
-  ..\app\PC_comm_handle.h ..\app\wifi_handle.h ..\drive\xmc_lcd.h \
-  ..\drive\at32_spiflash.h ..\drive\usr_touch.h ..\drive\soft_i2c.h \
+  ..\app\PC_comm_handle.h ..\app\wifi_handle.h ..\app\flash_programmer.h \
+  ..\drive\xmc_lcd.h ..\drive\at32_spiflash.h ..\drive\usr_touch.h \
+  ..\drive\soft_i2c.h \
   D:\Work\ Program\Keil_v5\ARM\Packs\GorgonMeducer\perf_counter\2.5.4\perf_counter.h \
   D:\Work\ Program\Keil_v5\ARM\Packs\GorgonMeducer\perf_counter\2.5.4\perfc_port_default.h \
   D:\Work\ Program\Keil_v5\ARM\Packs\ARM\CMSIS\6.3.0\CMSIS\Core\Include\cmsis_compiler.h \

@@ -63,38 +63,17 @@
             <ModeSub name="Time_Base" value=""/>
         </Mode>
     </SYSTEM>
-    <TMR2>
-        <Mode>
-            <ModeSub name="Activated" value="TRUE"/>
-            <ModeSub name="Enable One cycle mode" value="TRUE"/>
-        </Mode>
-        <Parameters>
-            <ParametersSub name="DividerValue" value="28"/>
-            <ParametersSub name="CounterDirection" value="TMR_COUNT_DOWN"/>
-            <ParametersSub name="Period" value="60000"/>
-        </Parameters>
-    </TMR2>
     <TMR3>
         <Mode>
             <ModeSub name="Channel1 mode" value="Output_CH1"/>
             <ModeSub name="Activated" value="TRUE"/>
         </Mode>
         <Parameters>
-            <ParametersSub name="DividerValue" value="3"/>
-            <ParametersSub name="Period" value="59999"/>
+            <ParametersSub name="Period" value="10000"/>
             <ParametersSub name="OCMode_1" value="TMR_OUTPUT_CONTROL_PWM_MODE_A"/>
-            <ParametersSub name="ChannelData_1" value="30000"/>
+            <ParametersSub name="ChannelData_1" value="5000"/>
         </Parameters>
     </TMR3>
-    <TMR5>
-        <Mode>
-            <ModeSub name="Activated" value="TRUE"/>
-        </Mode>
-        <Parameters>
-            <ParametersSub name="DividerValue" value="19"/>
-            <ParametersSub name="Period" value="59999"/>
-        </Parameters>
-    </TMR5>
     <USART1>
         <Mode>
             <ModeSub name="Mode" value="Asynchronous"/>
@@ -104,7 +83,6 @@
         </Parameters>
         <Interrupts>
             <InterruptsSub name="Interrupt_RDBF" value="TRUE"/>
-            <InterruptsSub name="Interrupt_TDC" value="TRUE"/>
         </Interrupts>
     </USART1>
     <UART4>
@@ -240,11 +218,22 @@
                 <ParametersSub name="TaskStackBuffer" value="NULL"/>
                 <ParametersSub name="TaskBuffer" value="NULL"/>
             </ParametersGroup>
+            <ParametersGroup>
+                <ParametersSub name="TaskName" value="flash_task"/>
+                <ParametersSub name="TaskPriority" value="0"/>
+                <ParametersSub name="TaskStackSize" value="2048"/>
+                <ParametersSub name="TaskEntryFunction" value="flash_function"/>
+                <ParametersSub name="TaskCodeGenerationOption" value="Default"/>
+                <ParametersSub name="TaskParameters" value="NULL"/>
+                <ParametersSub name="TaskAllocation" value="Dynamic"/>
+                <ParametersSub name="TaskStackBuffer" value="NULL"/>
+                <ParametersSub name="TaskBuffer" value="NULL"/>
+            </ParametersGroup>
         </Tasks>
         <Queues>
             <ParametersGroup>
                 <ParametersSub name="QueueName" value="usart1_queue"/>
-                <ParametersSub name="QueueSize" value="128"/>
+                <ParametersSub name="QueueSize" value="1024"/>
                 <ParametersSub name="QueueItemSize" value="uint8_t"/>
                 <ParametersSub name="QueueAllocation" value="Dynamic"/>
                 <ParametersSub name="QueueBufferName" value="NULL"/>
@@ -284,11 +273,9 @@
         <DMA1_Channel2_IRQHandler>0;5;0;1;0</DMA1_Channel2_IRQHandler>
         <DMA1_Channel3_IRQHandler>0;5;0;1;0</DMA1_Channel3_IRQHandler>
         <ADC1_2_IRQHandler>0;5;0;1;0</ADC1_2_IRQHandler>
-        <TMR2_GLOBAL_IRQHandler>0;5;0;1;0</TMR2_GLOBAL_IRQHandler>
         <TMR3_GLOBAL_IRQHandler>0;5;0;1;0</TMR3_GLOBAL_IRQHandler>
         <USART1_IRQHandler>1;5;0;1;0</USART1_IRQHandler>
         <EXINT15_10_IRQHandler>1;5;0;1;0</EXINT15_10_IRQHandler>
-        <TMR5_GLOBAL_IRQHandler>0;5;0;1;0</TMR5_GLOBAL_IRQHandler>
         <UART4_IRQHandler>1;5;0;1;0</UART4_IRQHandler>
         <SPI4_IRQHandler>0;5;0;1;0</SPI4_IRQHandler>
     </NVIC>
